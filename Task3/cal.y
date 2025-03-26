@@ -3,7 +3,6 @@
   #include <stdlib.h>
   void yyerror(char *);
   int yylex(void);
-  int result;
 %}
 
 %token NUMBER
@@ -11,30 +10,30 @@
 
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
-%right UMINUS
+%right UMINUS  
 
 %%
 
 program:
-  program expr '\n' { printf("Restult: %d\n", $2); }
-  | 
+  program expr '\n' { printf("Result: %d\n", $2); }
+  | /* empty */
   ;
 
 expr:
-  NUMBER { $$ = $1; }
-  | expr PLUS expr  { $$ = $1 + $3; }
+  NUMBER { $$ = $1; }  
+  | expr PLUS expr { $$ = $1 + $3; }
   | expr MINUS expr { $$ = $1 - $3; }
   | expr MULTIPLY expr { $$ = $1 * $3; }
-  | expr DIVIDE expr {
-    if ($3 == 0) {
-        yyerror("Error: Division by 0");
+  | expr DIVIDE expr { 
+      if ($3 == 0) {
+        yyerror("Error: Division by zero");
         $$ = 0;
-    } else {
-        $$ = $1 / $3;
+      } else {
+        $$ = $1 / $3; 
+      }
     }
-  }
-  | MINUS expr %prec UMINUS { $$ = -$2; } 
-  | LPAREN expr RPAREN { $$ = $2; }
+  | MINUS expr %prec UMINUS { $$ = -$2; }  
+  | LPAREN expr RPAREN { $$ = $2; }  
   ;
 
 %%
