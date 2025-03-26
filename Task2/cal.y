@@ -10,13 +10,13 @@
 
 %left PLUS MINUS
 %left MULTIPLY DIVIDE
-%right UMINUS  // Unary minus (e.g., -5)
+%right UMINUS
 
 %%
 
 program:
   program expr '\n' { printf("Valid Syntax\n"); }
-  | /* empty */
+  | 
   ;
 
 expr:
@@ -25,7 +25,7 @@ expr:
   | expr MINUS expr { }
   | expr MULTIPLY expr { }
   | expr DIVIDE expr { }
-  | MINUS expr %prec UMINUS { }  // Handling unary minus
+  | MINUS expr %prec UMINUS { } 
   | LPAREN expr RPAREN { }
   ;
 
