@@ -73,9 +73,8 @@
   #include <stdlib.h>
   void yyerror(char *);
   int yylex(void);
-  int result;
 
-#line 79 "y.tab.c"
+#line 78 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -564,8 +563,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    19,    19,    20,    24,    25,    26,    27,    28,    36,
-      37
+       0,    18,    18,    19,    23,    24,    25,    26,    27,    35,
+      36
 };
 #endif
 
@@ -1134,62 +1133,62 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program expr '\n'  */
-#line 19 "cal.y"
-                    { printf("Restult: %d\n", yyvsp[-1]); }
-#line 1140 "y.tab.c"
+#line 18 "cal.y"
+                    { printf("Result: %d\n", yyvsp[-1]); }
+#line 1139 "y.tab.c"
     break;
 
   case 4: /* expr: NUMBER  */
-#line 24 "cal.y"
+#line 23 "cal.y"
          { yyval = yyvsp[0]; }
-#line 1146 "y.tab.c"
+#line 1145 "y.tab.c"
     break;
 
   case 5: /* expr: expr PLUS expr  */
-#line 25 "cal.y"
-                    { yyval = yyvsp[-2] + yyvsp[0]; }
-#line 1152 "y.tab.c"
+#line 24 "cal.y"
+                   { yyval = yyvsp[-2] + yyvsp[0]; }
+#line 1151 "y.tab.c"
     break;
 
   case 6: /* expr: expr MINUS expr  */
-#line 26 "cal.y"
+#line 25 "cal.y"
                     { yyval = yyvsp[-2] - yyvsp[0]; }
-#line 1158 "y.tab.c"
+#line 1157 "y.tab.c"
     break;
 
   case 7: /* expr: expr MULTIPLY expr  */
-#line 27 "cal.y"
+#line 26 "cal.y"
                        { yyval = yyvsp[-2] * yyvsp[0]; }
-#line 1164 "y.tab.c"
+#line 1163 "y.tab.c"
     break;
 
   case 8: /* expr: expr DIVIDE expr  */
-#line 28 "cal.y"
-                     {
-    if (yyvsp[0] == 0) {
-        yyerror("Error: Division by 0");
+#line 27 "cal.y"
+                     { 
+      if (yyvsp[0] == 0) {
+        yyerror("Error: Division by zero");
         yyval = 0;
-    } else {
-        yyval = yyvsp[-2] / yyvsp[0];
+      } else {
+        yyval = yyvsp[-2] / yyvsp[0]; 
+      }
     }
-  }
-#line 1177 "y.tab.c"
+#line 1176 "y.tab.c"
     break;
 
   case 9: /* expr: MINUS expr  */
-#line 36 "cal.y"
+#line 35 "cal.y"
                             { yyval = -yyvsp[0]; }
-#line 1183 "y.tab.c"
+#line 1182 "y.tab.c"
     break;
 
   case 10: /* expr: LPAREN expr RPAREN  */
-#line 37 "cal.y"
+#line 36 "cal.y"
                        { yyval = yyvsp[-1]; }
-#line 1189 "y.tab.c"
+#line 1188 "y.tab.c"
     break;
 
 
-#line 1193 "y.tab.c"
+#line 1192 "y.tab.c"
 
       default: break;
     }
@@ -1382,7 +1381,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 40 "cal.y"
+#line 39 "cal.y"
 
 
 void yyerror(char *s) {
