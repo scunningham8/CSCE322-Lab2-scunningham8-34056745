@@ -14,8 +14,23 @@
     printf("Token: <NUMBER>; Lexeme: %s\n", yytext);
 }
 
-[\t\n]+ {}
-. {}
+[0-9]+ {
+    printf("<NUMBER, %s>", yytext);
+}
+
+[-] {
+    printf("<MINUS>");
+}
+
+[+] {
+    printf("<PLUS>");
+}
+
+[\t\n] {}
+
+. {
+    printf("<UNKNOWN-TOKEN, %s>", yytext);
+}
 %%
 
 int yywrap(){
