@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 6
-#define YY_END_OF_BUFFER 7
+#define YY_NUM_RULES 7
+#define YY_END_OF_BUFFER 8
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,7 +362,7 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[12] =
     {   0,
-        0,    0,    7,    5,    4,    4,    3,    2,    1,    1,
+        0,    0,    8,    6,    5,    4,    2,    3,    1,    1,
         0
     } ;
 
@@ -371,7 +371,7 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    4,    1,    5,    1,    1,    6,    6,    6,
         6,    6,    6,    6,    6,    6,    6,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -441,11 +441,13 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "scanner.l"
-#line 2 "scanner.l"
-    #include <stdio.h>
-#line 448 "lex.yy.c"
-#line 449 "lex.yy.c"
+#line 1 "scanner2.l"
+#line 2 "scanner2.l"
+  #include <stdio.h>
+  #include <stdlib.h>
+  #include "y.tab.h" 
+#line 450 "lex.yy.c"
+#line 451 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -662,10 +664,10 @@ YY_DECL
 		}
 
 	{
-#line 5 "scanner.l"
+#line 7 "scanner2.l"
 
 
-#line 669 "lex.yy.c"
+#line 671 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -724,44 +726,41 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "scanner.l"
-{
-    printf("<NUMBER, %s>\n", yytext);
-}
+#line 9 "scanner2.l"
+{ yylval = atoi(yytext); return NUMBER; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "scanner.l"
-{
-    printf("<MINUS>\n");
-}
+#line 10 "scanner2.l"
+{ return PLUS; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 15 "scanner.l"
-{
-    printf("<PLUS>\n");
-}
+#line 11 "scanner2.l"
+{ return MINUS; }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 19 "scanner.l"
-{}
+#line 12 "scanner2.l"
+{ return '\n'; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "scanner.l"
-{
-    printf("<UNKNOWN-TOKEN, %s>\n", yytext);
-}
+#line 13 "scanner2.l"
+{ }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 24 "scanner.l"
+#line 14 "scanner2.l"
+{ printf("Unrecognized character: %s\n", yytext); }
+	YY_BREAK
+case 7:
+YY_RULE_SETUP
+#line 16 "scanner2.l"
 ECHO;
 	YY_BREAK
-#line 765 "lex.yy.c"
+#line 764 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1766,14 +1765,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 24 "scanner.l"
+#line 16 "scanner2.l"
 
 
-int yywrap(){
+int yywrap(void) {
     return 1;
 }
 
-int main(){
-    yylex();
-    return 0;
-}

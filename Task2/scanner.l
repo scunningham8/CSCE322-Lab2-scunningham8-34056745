@@ -2,7 +2,7 @@
     #include <stdio.h>
 %}
 
-%%
+%%re
 
 [0-9]+ {
     printf("<NUMBER, %s>\n", yytext);
